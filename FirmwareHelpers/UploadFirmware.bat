@@ -1,0 +1,2 @@
+python upload_firmware.py
+PAUSE
