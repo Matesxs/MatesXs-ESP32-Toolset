@@ -17,7 +17,7 @@ class SerialReceiver(threading.Thread):
     while self.port.isOpen():
       if self.port.inWaiting() > 0:
         line = ser.readline().decode("utf-8").strip()
-        print(f"{time.time()} Recv:\t{line}")
+        print(f"{time.time():.2f} Recv:\t{line}")
 
 if __name__ == '__main__':
   com_ports = [p.device for p in serial.tools.list_ports.comports()]

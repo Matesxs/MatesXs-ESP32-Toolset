@@ -36,6 +36,5 @@ void startStopwatch(uint64_t microsecond_divider)
 unsigned long long getStopwatchVal()
 {
   unsigned long long tmp = count;
-  vTaskDelay(5);
   return tmp;
 }
