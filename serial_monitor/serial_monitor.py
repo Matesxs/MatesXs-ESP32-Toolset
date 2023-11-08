@@ -62,8 +62,8 @@ if __name__ == '__main__':
 
   while True:
     try:
-      inp = input()
-      ser.write(inp.encode("utf-8"))
+      inp = input().strip()
+      ser.write((inp + "\r\n").encode("utf-8"))
     except KeyboardInterrupt:
       break
     except Exception:

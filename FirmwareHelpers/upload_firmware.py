@@ -3,9 +3,10 @@ import serial.tools.list_ports
 from pathlib import Path
 import esptool
 
-def upload_firmware(name, port):
+def upload_firmware(name, port, update_only):
   try:
-    esptool.main(["--port", f"{port}", "erase_flash"])
+    if not update_only:
+      esptool.main(["--port", f"{port}", "erase_flash"])
     esptool.main(["--port", f"{port}", "write_flash", "0x000000", f"{name}"])
   except:
     print("Cant execute firmware uploading!")
@@ -45,7 +46,9 @@ if __name__ == '__main__':
       print("Invalid firmware index")
       sys.exit(0)
 
-    upload_firmware(file_names[selected_file_index].absolute(), selected_comport)
+    update_only = input("Update only (y/n): ").lower() == "y"
+
+    upload_firmware(file_names[selected_file_index].absolute(), selected_comport, update_only)
     sys.exit(0)
 
   print("Cant find firmware file in folder!")
