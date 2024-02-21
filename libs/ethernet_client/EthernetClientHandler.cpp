@@ -40,7 +40,7 @@ void EthernetClientHandler::get_message(String &dest)
   buff.remove(0, buff.length());
 }
 
-void EthernetClientHandler::send_message(String message)
+void EthernetClientHandler::send_message(const String& message)
 {
   if (client.connected())
   {
@@ -91,9 +91,11 @@ void EthernetClientHandler::update()
     buff.trim();
 
 #ifdef DEBUG_LEVEL
-    DEBUG("Serial message received: %s", buff);
+    DEBUG("Serial message received: %s", buff.c_str());
 #endif
     vTaskDelay(pdMS_TO_TICKS(1));
+
+    handleReceivedMessage();
   }
 
   if (connectedState)
@@ -118,7 +120,7 @@ void EthernetClientHandler::update()
         buff.trim();
 
 #ifdef DEBUG_LEVEL
-        DEBUG("TCP message received: %s", buff);
+        DEBUG("TCP message received: %s", buff.c_str());
 #endif
         vTaskDelay(pdMS_TO_TICKS(1));
 

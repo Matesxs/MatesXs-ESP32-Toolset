@@ -99,9 +99,11 @@ void EthernetServerHandler::update()
     buff.trim();
 
 #ifdef DEBUG_LEVEL
-    DEBUG("Serial message received: %s", buff);
+    DEBUG("Serial message received: %s", buff.c_str());
 #endif
     vTaskDelay(pdMS_TO_TICKS(1));
+
+    handleReceivedMessage();
   }
 
   if (connectedState)
@@ -126,7 +128,7 @@ void EthernetServerHandler::update()
         buff.trim();
 
 #ifdef DEBUG_LEVEL
-        DEBUG("TCP message received: %s", buff);
+        DEBUG("TCP message received: %s", buff.c_str());
 #endif
         vTaskDelay(pdMS_TO_TICKS(1));
 
